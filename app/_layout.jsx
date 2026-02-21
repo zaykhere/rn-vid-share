@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { Slot } from 'expo-router'
+import { StyleSheet, Text, View } from "react-native";
+import { Slot } from "expo-router";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
-import { useEffect } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useEffect } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import GlobalProvider from "../context/GlobalProvider";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -37,17 +38,22 @@ const RootLayout = () => {
   }
 
   return (
-    <SafeAreaProvider>
-    <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
-    </Stack>
-    </SafeAreaProvider>
-  )
-}
+    <GlobalProvider>
+      <SafeAreaProvider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="search/[query]"
+            options={{ headerShown: false }}
+          />
+        </Stack>
+      </SafeAreaProvider>
+    </GlobalProvider>
+  );
+};
 
-export default RootLayout
+export default RootLayout;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

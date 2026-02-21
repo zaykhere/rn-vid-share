@@ -1,11 +1,24 @@
-import { router } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
 import { images } from "../constants";
+import { useGlobalContext } from "../context/GlobalProvider";
+import { useEffect } from "react";
 
 export default function App() {
+  const {loading, isLogged} = useGlobalContext();
+
+  console.log({loading, isLogged})
+
+  useEffect(() => {
+    if(!loading && isLogged) router.replace("/home")
+  }, [loading, isLogged])
+  
+
+  
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
